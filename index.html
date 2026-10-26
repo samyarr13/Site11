@@ -3,325 +3,513 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سایت در حال ساخت است | مجموعه عاشقان علی (A.A)</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>مجموعه عاشقان علی (A.A) | در حال ساخت</title>
+    <!-- Vazirmatn Persian Font -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Vazirmatn Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Vazirmatn', 'sans-serif'],
-                    },
-                    colors: {
-                        neonCyan: '#00f3ff',
-                        neonMagenta: '#ff007f',
-                        neonPurple: '#8a2be2',
-                        darkBg: '#08090e',
-                    },
-                    boxShadow: {
-                        'neon-cyan': '0 0 20px rgba(0, 243, 255, 0.4)',
-                        'neon-magenta': '0 0 20px rgba(255, 0, 127, 0.4)',
-                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.65)',
-                    },
-                    animation: {
-                        'pulse-glow': 'pulseGlow 3s infinite ease-in-out',
-                    },
-                    keyframes: {
-                        pulseGlow: {
-                            '0%, 100%': { filter: 'drop-shadow(0 0 15px rgba(0, 243, 255, 0.6))' },
-                            '50%': { filter: 'drop-shadow(0 0 25px rgba(255, 0, 127, 0.8))' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
     <style>
-        body {
+        :root {
+            --primary-glow: #00f0ff;
+            --secondary-glow: #7000ff;
+            --accent-pink: #ff007f;
+            --glass-bg: rgba(13, 17, 23, 0.65);
+            --glass-border: rgba(0, 240, 255, 0.25);
+            --glass-card: rgba(20, 25, 40, 0.5);
+            --text-color: #f0f6fc;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
             font-family: 'Vazirmatn', sans-serif;
-            background-color: #08090e;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #05050a;
+            color: var(--text-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
             overflow-x: hidden;
-            color: #ffffff;
+            position: relative;
+            padding: 20px 15px;
         }
 
-        /* Glassmorphism Styling */
-        .glass-card {
-            background: rgba(15, 18, 28, 0.65);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-        }
-
-        .glass-input {
-            background: rgba(10, 12, 20, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(0, 243, 255, 0.3);
-        }
-
-        .glass-input:focus {
-            border-color: #00f3ff;
-            box-shadow: 0 0 18px rgba(0, 243, 255, 0.4);
-            outline: none;
-        }
-
-        /* Background Cyber Grid */
-        .bg-grid {
-            background-size: 40px 40px;
-            background-image: 
-                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-        }
-
-        /* Glowing Text Effects */
-        .glow-text-cyan {
-            text-shadow: 0 0 10px rgba(0, 243, 255, 0.7), 0 0 25px rgba(0, 243, 255, 0.5);
-        }
-
-        #particles-canvas {
+        /* Animated Cyber Background */
+        body::before {
+            content: '';
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            z-index: 0;
-            pointer-events: none;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(112, 0, 255, 0.2) 0%, transparent 40%),
+                radial-gradient(circle at 90% 80%, rgba(0, 240, 255, 0.18) 0%, transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(255, 0, 127, 0.12) 0%, transparent 50%);
+            z-index: -2;
         }
 
-        .scanline {
+        /* Grid Effect Overlay */
+        .cyber-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 100px;
-            z-index: 2;
-            background: linear-gradient(
-                0deg,
-                rgba(0, 0, 0, 0) 0%,
-                rgba(0, 243, 255, 0.03) 50%,
-                rgba(0, 0, 0, 0) 100%
-            );
-            opacity: 0.7;
-            position: absolute;
-            bottom: 100%;
-            animation: scanline 8s linear infinite;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            z-index: -1;
             pointer-events: none;
         }
 
-        @keyframes scanline {
-            0% { top: -10%; }
-            100% { top: -100px; bottom: 0; }
+        /* Main Container */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: 
+                0 8px 32px 0 rgba(0, 0, 0, 0.6),
+                0 0 20px rgba(0, 240, 255, 0.15),
+                inset 0 0 15px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            margin: auto;
+            position: relative;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header Image Section */
+        .image-banner {
+            width: 100%;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .image-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            filter: brightness(0.9) contrast(1.1);
+            transition: transform 0.5s ease;
+        }
+
+        .container:hover .image-banner img {
+            transform: scale(1.03);
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 40%, rgba(13, 17, 23, 0.95) 100%);
+        }
+
+        .badge-cyber {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid var(--primary-glow);
+            color: var(--primary-glow);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+        }
+
+        .badge-pulse {
+            width: 8px;
+            height: 8px;
+            background-color: var(--primary-glow);
+            border-radius: 50%;
+            box-shadow: 0 0 8px var(--primary-glow);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(0.8); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.3; transform: scale(0.8); }
+        }
+
+        /* Content Area */
+        .content {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .brand-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffffff 0%, var(--primary-glow) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: #8b949e;
+            margin-bottom: 22px;
+            line-height: 1.6;
+        }
+
+        /* Timer Section */
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 25px;
+            direction: ltr;
+        }
+
+        .timer-box {
+            background: var(--glass-card);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 10px 5px;
+            backdrop-filter: blur(10px);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.3s;
+        }
+
+        .timer-box:hover {
+            border-color: var(--primary-glow);
+        }
+
+        .timer-val {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--primary-glow);
+            font-family: monospace;
+            text-shadow: 0 0 8px rgba(0, 240, 255, 0.4);
+        }
+
+        .timer-lbl {
+            font-size: 0.7rem;
+            color: #8b949e;
+            margin-top: 4px;
+        }
+
+        /* Form Styles */
+        .form-title {
+            font-size: 1rem;
+            color: #c9d1d9;
+            margin-bottom: 15px;
+            text-align: right;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-title i {
+            color: var(--primary-glow);
+        }
+
+        .form-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            text-align: right;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 12px;
+        }
+
+        .input-group {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-group i {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #8b949e;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 38px 12px 12px;
+            background: rgba(10, 15, 25, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        select.form-control {
+            appearance: none;
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+
+        select.form-control option {
+            background-color: #0d1117;
+            color: #fff;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-glow);
+            box-shadow: 0 0 12px rgba(0, 240, 255, 0.25);
+            background: rgba(15, 22, 36, 0.8);
+        }
+
+        .form-control:focus + i {
+            color: var(--primary-glow);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            margin-top: 5px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--secondary-glow) 0%, var(--primary-glow) 100%);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 240, 255, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.5);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Success Message */
+        .success-msg {
+            display: none;
+            background: rgba(0, 240, 255, 0.1);
+            border: 1px solid var(--primary-glow);
+            color: var(--primary-glow);
+            padding: 12px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        /* External Link */
+        .external-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 20px;
+            color: var(--accent-pink);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 0, 127, 0.3);
+            border-radius: 20px;
+            background: rgba(255, 0, 127, 0.05);
+            transition: all 0.3s;
+        }
+
+        .external-link-btn:hover {
+            background: rgba(255, 0, 127, 0.15);
+            border-color: var(--accent-pink);
+            box-shadow: 0 0 12px rgba(255, 0, 127, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: #6e7681;
+            padding: 10px;
+        }
+
+        /* Responsive Settings */
+        @media (max-width: 480px) {
+            .input-row {
+                flex-direction: column;
+                gap: 12px;
+            }
+            .brand-title {
+                font-size: 1.35rem;
+            }
+            .image-banner {
+                height: 180px;
+            }
+            .content {
+                padding: 18px 15px;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex items-center justify-center relative p-4 sm:p-6 overflow-y-auto">
+<body>
 
-    <!-- Canvas for Particle Stars Effect -->
-    <canvas id="particles-canvas"></canvas>
+    <div class="cyber-grid"></div>
 
-    <!-- Glowing Background Lights -->
-    <div class="fixed top-1/4 -left-20 w-72 h-72 sm:w-96 sm:h-96 bg-neonCyan/20 rounded-full blur-[130px] pointer-events-none"></div>
-    <div class="fixed bottom-1/4 -right-20 w-72 h-72 sm:w-96 sm:h-96 bg-neonMagenta/20 rounded-full blur-[130px] pointer-events-none"></div>
-    <div class="fixed inset-0 bg-grid pointer-events-none z-0"></div>
-    <div class="scanline"></div>
-
-    <!-- Main Container -->
-    <main class="relative z-10 w-full max-w-3xl my-auto">
-        <div class="glass-card rounded-3xl p-6 sm:p-10 shadow-glass border border-white/10 text-center relative overflow-hidden backdrop-blur-xl">
-            
-            <!-- Neon Top/Bottom Borders -->
-            <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-neonCyan to-transparent"></div>
-            <div class="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-neonMagenta to-transparent"></div>
-
-            <!-- Custom Cyberpunk Construction Image -->
-            <div class="relative mx-auto mb-6 w-full max-w-[340px] sm:max-w-[460px] group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-neonCyan via-neonPurple to-neonMagenta rounded-2xl blur opacity-50 group-hover:opacity-80 transition duration-500"></div>
-                
-                <div class="relative bg-darkBg rounded-2xl overflow-hidden border border-white/20 shadow-2xl">
-                    <img src="https://watermarked-img.s3.amazonaws.com/watermarked_img_17288253668804907423.jpg" 
-                         alt="کارگران سایبرپنک در حال ساخت وب‌سایت" 
-                         class="w-full h-auto max-h-[240px] sm:max-h-[280px] object-cover animate-pulse-glow"
-                         onerror="this.onerror=null; this.src='https://placehold.co/800x450/08090e/00f3ff?text=Cyberpunk+Construction';" />
-
-                    <div class="absolute bottom-2 left-1/2 -translate-x-1/2 bg-darkBg/90 border border-neonCyan/40 px-3 py-1 rounded-full text-[11px] sm:text-xs text-neonCyan font-mono tracking-widest flex items-center gap-2">
-                        <span class="w-2 h-2 rounded-full bg-neonCyan animate-ping"></span>
-                        A.A SYSTEM UNDER CONSTRUCTION
-                    </div>
-                </div>
+    <div class="container">
+        <!-- Banner Image -->
+        <div class="image-banner">
+            <img src="watermarked_img_17288253668804907423.jpg" alt="ربات‌ها در حال ساخت سایت مجموعه عاشقان علی">
+            <div class="image-overlay"></div>
+            <div class="badge-cyber">
+                <span class="badge-pulse"></span>
+                سیستم آنلاین درحال توسعه
             </div>
-
-            <!-- Subtitle Brand -->
-            <div class="inline-block px-4 py-1 rounded-full bg-white/5 border border-white/10 text-neonCyan text-xs sm:text-sm font-semibold mb-3">
-                مجموعه عاشقان علی (A.A)
-            </div>
-
-            <!-- Main Title -->
-            <h1 class="text-2xl sm:text-4xl font-extrabold text-white mb-3 tracking-tight">
-                سایت در حال <span class="text-transparent bg-clip-text bg-gradient-to-r from-neonCyan via-purple-400 to-neonMagenta glow-text-cyan">ساخت و توسعه</span> است
-            </h1>
-            
-            <p class="text-gray-300 text-xs sm:text-base max-w-lg mx-auto mb-8 font-light leading-relaxed">
-                در حال راه‌اندازی پلتفرم گیمینگ و سایبرپنک مجموعه هستیم. ایمیل خود را وارد کنید تا به محض آماده شدن، شما را باخبر کنیم!
-            </p>
-
-            <!-- Progress Bar -->
-            <div class="mb-8 max-w-md mx-auto">
-                <div class="flex justify-between text-xs sm:text-sm font-semibold mb-2">
-                    <span class="text-neonCyan flex items-center gap-1">
-                        <i class="fa-solid fa-microchip animate-spin text-xs"></i> پیشرفت پروژه
-                    </span>
-                    <span class="text-neonMagenta font-mono">88%</span>
-                </div>
-                <div class="w-full bg-gray-900/80 rounded-full h-3 p-0.5 border border-white/10 shadow-inner">
-                    <div class="bg-gradient-to-r from-neonCyan via-neonPurple to-neonMagenta h-full rounded-full transition-all duration-1000 relative" style="width: 88%">
-                        <div class="absolute top-0 right-0 bottom-0 w-2 bg-white rounded-full animate-pulse shadow-[0_0_8px_#fff]"></div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Auto-Repeating Dynamic Countdown Timer -->
-            <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto mb-8">
-                <div class="glass-card p-2 sm:p-3 rounded-xl border border-white/10">
-                    <span id="days" class="block text-lg sm:text-2xl font-bold font-mono text-neonCyan">01</span>
-                    <span class="text-[10px] sm:text-xs text-gray-400">روز</span>
-                </div>
-                <div class="glass-card p-2 sm:p-3 rounded-xl border border-white/10">
-                    <span id="hours" class="block text-lg sm:text-2xl font-bold font-mono text-white">12</span>
-                    <span class="text-[10px] sm:text-xs text-gray-400">ساعت</span>
-                </div>
-                <div class="glass-card p-2 sm:p-3 rounded-xl border border-white/10">
-                    <span id="minutes" class="block text-lg sm:text-2xl font-bold font-mono text-white">59</span>
-                    <span class="text-[10px] sm:text-xs text-gray-400">دقیقه</span>
-                </div>
-                <div class="glass-card p-2 sm:p-3 rounded-xl border border-white/10">
-                    <span id="seconds" class="block text-lg sm:text-2xl font-bold font-mono text-neonMagenta">40</span>
-                    <span class="text-[10px] sm:text-xs text-gray-400">ثانیه</span>
-                </div>
-            </div>
-
-            <!-- Email Form (Formspree Connected) -->
-            <div class="max-w-md mx-auto mb-8">
-                <form id="notify-form" action="https://formspree.io/f/meaaebpz" method="POST" onsubmit="handleFormSubmit(event)" class="flex flex-col sm:flex-row gap-2">
-                    <div class="relative flex-1">
-                        <input type="email" name="email" id="email-input" required placeholder="ایمیل خود را وارد کنید..." 
-                            class="w-full glass-input text-white text-xs sm:text-sm rounded-xl px-4 py-3 text-right placeholder-gray-400 focus:outline-none transition">
-                    </div>
-                    <button type="submit" id="submit-btn"
-                        class="bg-gradient-to-r from-neonCyan to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-gray-950 font-bold text-xs sm:text-sm px-6 py-3 rounded-xl shadow-neon-cyan transition duration-300 transform active:scale-95 flex items-center justify-center gap-2 whitespace-nowrap cursor-pointer">
-                        <span id="btn-text">باخبرم کن</span>
-                        <i class="fa-solid fa-paper-plane" id="btn-icon"></i>
-                    </button>
-                </form>
-                
-                <!-- Feedback Notification -->
-                <div id="toast-message" class="hidden mt-3 text-xs p-3 rounded-xl bg-neonCyan/10 border border-neonCyan/40 text-neonCyan font-medium transition duration-300">
-                    <i class="fa-solid fa-circle-check ml-1"></i> ایمیل شما با موفقیت ثبت شد! به محض رونمایی باخبرتان می‌کنیم.
-                </div>
-            </div>
-
-            <!-- Social Icons -->
-            <div class="flex items-center justify-center gap-4 sm:gap-6 pt-2 border-t border-white/10">
-                <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-neonCyan hover:border-neonCyan hover:shadow-neon-cyan transition duration-300 text-lg">
-                    <i class="fa-brands fa-discord"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-neonMagenta hover:border-neonMagenta hover:shadow-neon-magenta transition duration-300 text-lg">
-                    <i class="fa-brands fa-instagram"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-cyan-400 hover:border-cyan-400 transition duration-300 text-lg">
-                    <i class="fa-brands fa-telegram"></i>
-                </a>
-                <a href="#" class="w-10 h-10 rounded-xl glass-card flex items-center justify-center text-gray-300 hover:text-purple-400 hover:border-purple-400 transition duration-300 text-lg">
-                    <i class="fa-brands fa-twitch"></i>
-                </a>
-            </div>
-
         </div>
 
-        <!-- Copyright Footer -->
-        <p class="text-center text-gray-400 text-xs sm:text-sm mt-6 font-medium tracking-wide">
-            کلیه حقوق برای مجموعه عاشقان علی (A.A) محفوظ است
-        </p>
-    </main>
+        <!-- Content -->
+        <div class="content">
+            <h1 class="brand-title">مجموعه عاشقان علی (A.A)</h1>
+            <p class="subtitle">سایت رسمی مجموعه در حال ساخت و آماده‌سازی زیرساخت‌های سیستم می‌باشد. به زودی در دسترس شما خواهیم بود.</p>
 
-    <!-- JavaScript Scripts -->
+            <!-- Auto Looping Timer -->
+            <div class="timer-grid">
+                <div class="timer-box">
+                    <div class="timer-val" id="seconds">40</div>
+                    <div class="timer-lbl">ثانیه</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-val" id="minutes">59</div>
+                    <div class="timer-lbl">دقیقه</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-val" id="hours">12</div>
+                    <div class="timer-lbl">ساعت</div>
+                </div>
+                <div class="timer-box">
+                    <div class="timer-val" id="days">01</div>
+                    <div class="timer-lbl">روز</div>
+                </div>
+            </div>
+
+            <!-- Form Connected to Formspree -->
+            <form id="notifyForm" action="https://formspree.io/f/meaaebpz" method="POST">
+                <div class="form-title">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span>ثبت‌نام برای دریافت اطلاع‌رسانی:</span>
+                </div>
+
+                <div class="form-grid">
+                    <!-- Name & Lastname -->
+                    <div class="input-row">
+                        <div class="input-group">
+                            <input type="text" name="name" class="form-control" placeholder="نام" required>
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="lastname" class="form-control" placeholder="نام خانوادگی" required>
+                            <i class="fa-solid fa-user-tag"></i>
+                        </div>
+                    </div>
+
+                    <!-- Iranian Messenger Select & ID -->
+                    <div class="input-row">
+                        <div class="input-group">
+                            <select name="iranian_messenger" class="form-control" required>
+                                <option value="" disabled selected>انتخاب پیام‌رسان ایرانی...</option>
+                                <option value="Eitaa">ایتا</option>
+                                <option value="Rubika">روبیکا</option>
+                                <option value="Bale">بله</option>
+                                <option value="Soroush">سروش پلاس</option>
+                                <option value="iGap">آی‌گپ</option>
+                            </select>
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <div class="input-group">
+                            <input type="text" name="messenger_id" class="form-control" placeholder="آیدی پیام‌رسان" required>
+                            <i class="fa-solid fa-at"></i>
+                        </div>
+                    </div>
+
+                    <!-- Email Field -->
+                    <div class="input-group">
+                        <input type="email" name="email" class="form-control" placeholder="پست الکترونیکی (ایمیل)" required>
+                        <i class="fa-solid fa-envelope"></i>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="submit-btn">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        ثبت اطلاعات و باخبرم کن
+                    </button>
+                </div>
+            </form>
+
+            <div id="successMsg" class="success-msg">
+                <i class="fa-solid fa-circle-check"></i> اطلاعات شما با موفقیت ثبت شد. به زودی اطلاع‌رسانی خواهیم کرد!
+            </div>
+
+            <!-- External Unmodified Link -->
+            <div>
+                <a href="https://t.me" target="_blank" class="external-link-btn">
+                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                    ورود به کانال اطلاع‌رسانی
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        کلیه حقوق برای مجموعه عاشقان علی (A.A) محفوظ است
+    </footer>
+
+    <!-- Script for Looping Countdown & Form Logic -->
     <script>
-        // --- 1. Background Canvas Particles Effect ---
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        resizeCanvas();
-        window.addEventListener('resize', resizeCanvas);
-
-        const particles = [];
-        const particleCount = Math.min(Math.floor(window.innerWidth / 15), 60);
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 0.5;
-                this.speedX = (Math.random() - 0.5) * 0.5;
-                this.speedY = (Math.random() - 0.5) * 0.5;
-                this.color = Math.random() > 0.5 ? '#00f3ff' : '#ff007f';
-                this.alpha = Math.random() * 0.6 + 0.2;
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.restore();
-            }
-        }
-
-        for (let i = 0; i < particleCount; i++) {
-            particles.push(new Particle());
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        animateParticles();
-
-
-        // --- 2. Auto-Repeating Countdown Timer (1 Day 12 Hours 59 Minutes 40 Seconds) ---
-        // Duration in milliseconds: (1d 12h 59m 40s)
-        const CYCLE_DURATION = ((1 * 24 * 60 * 60) + (12 * 60 * 60) + (59 * 60) + 40) * 1000;
-
+        // Duration: 1 Day, 12 Hours, 59 Minutes, 40 Seconds in Seconds
+        const TOTAL_CYCLE_SECONDS = (1 * 86400) + (12 * 3600) + (59 * 60) + 40;
+        
         function getOrSetTargetTime() {
-            let target = localStorage.getItem('aa_timer_target');
+            let targetTime = localStorage.getItem('cyber_timer_target');
             const now = new Date().getTime();
-
-            if (!target || now >= parseInt(target)) {
-                target = now + CYCLE_DURATION;
-                localStorage.setItem('aa_timer_target', target);
+            
+            if (!targetTime || now >= parseInt(targetTime)) {
+                targetTime = now + (TOTAL_CYCLE_SECONDS * 1000);
+                localStorage.setItem('cyber_timer_target', targetTime);
             }
-            return parseInt(target);
+            return parseInt(targetTime);
         }
 
         let targetTime = getOrSetTargetTime();
@@ -330,11 +518,11 @@
             const now = new Date().getTime();
             let distance = targetTime - now;
 
-            // When countdown reaches 0, auto-reset and repeat cycle
+            // Loop reset if finished
             if (distance <= 0) {
-                targetTime = now + CYCLE_DURATION;
-                localStorage.setItem('aa_timer_target', targetTime);
-                distance = CYCLE_DURATION;
+                targetTime = now + (TOTAL_CYCLE_SECONDS * 1000);
+                localStorage.setItem('cyber_timer_target', targetTime);
+                distance = targetTime - now;
             }
 
             const days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -342,58 +530,24 @@
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').innerText = String(days).padStart(2, '0');
-            document.getElementById('hours').innerText = String(hours).padStart(2, '0');
-            document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+            document.getElementById('days').innerText = days.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = hours.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
         }
 
-        updateCountdown();
         setInterval(updateCountdown, 1000);
+        updateCountdown();
 
+        // Form submission animation feedback
+        const notifyForm = document.getElementById('notifyForm');
+        const successMsg = document.getElementById('successMsg');
 
-        // --- 3. Formspree Form Submission Logic ---
-        async function handleFormSubmit(event) {
-            event.preventDefault();
-            const form = event.target;
-            const input = document.getElementById('email-input');
-            const toast = document.getElementById('toast-message');
-            const btnText = document.getElementById('btn-text');
-            const btnIcon = document.getElementById('btn-icon');
-            
-            if(!input.value) return;
-
-            btnText.innerText = 'در حال ارسال...';
-            btnIcon.className = 'fa-solid fa-spinner animate-spin';
-
-            try {
-                const response = await fetch(form.action, {
-                    method: 'POST',
-                    body: new FormData(form),
-                    headers: { 'Accept': 'application/json' }
-                });
-
-                if (response.ok) {
-                    showSuccess();
-                } else {
-                    showSuccess(); // Fallback UI
-                }
-            } catch (error) {
-                showSuccess(); // Fallback UI
-            }
-
-            function showSuccess() {
-                btnText.innerText = 'ثبت شد!';
-                btnIcon.className = 'fa-solid fa-check';
-                toast.classList.remove('hidden');
-                input.value = '';
-
-                setTimeout(() => {
-                    btnText.innerText = 'باخبرم کن';
-                    btnIcon.className = 'fa-solid fa-paper-plane';
-                }, 4000);
-            }
-        }
+        notifyForm.addEventListener('submit', function(e) {
+            setTimeout(() => {
+                successMsg.style.display = 'block';
+            }, 500);
+        });
     </script>
 </body>
 </html>
